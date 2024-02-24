@@ -56,5 +56,34 @@ router.post('/signin',async (req,res)=>{
 
 })
 
+
+router.post('/courses', adminMiddleware ,async (req,res)=>{
+    // implement course creation logic 
+    try{
+        const title = req.body.title;
+        const description =req.body.description
+        const imageLink = req.body.imageLink
+        const price = req.body.price
+        //zod
+        const newCourse=await Course.create({
+            title,
+            description,
+            imageLink,
+            price
+        })
+    
+        res.json({
+            message:"course created successfully",
+            courseId:newCourse._id
+        })
+
+    }catch(error){
+        console.log('something went wrong in admin routes');
+        throw{error}
+    }
+   
+})
+
+
 module.exports = router
 
