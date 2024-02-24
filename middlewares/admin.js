@@ -1,3 +1,5 @@
+const jwt =require('jsonwebtoken');
+const secret =require('../index');
 
 //Middleware for handling auth 
 function adminMiddleware(req,res,next){
@@ -8,7 +10,16 @@ function adminMiddleware(req,res,next){
     //Bearer jwt
     const words =token.split(" ");
     const jwtToken =words[1];
-    
+
+    const decodedValue=jwt.verify(jwtToken,secret);
+    if(decodedValue.username){
+        next();
+    }else{
+        res.status(403).json({
+            message:"you are not authenticated"
+        })
+    }
+
 
 }
 
