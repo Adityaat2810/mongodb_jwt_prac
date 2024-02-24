@@ -1,5 +1,5 @@
 const express = require('express');
-const adminMiddleware = require('../middleware/admin');
+const adminMiddleware = require('../middlewares/admin');
 const router = express.Router();
 const {Admin} =require('../db/index');
 const {Course} =require('../db/index');
@@ -35,7 +35,7 @@ router.post('/signin',async (req,res)=>{
     const username  =req.body.username;
     const password  =req.body.password;
 
-    const isValidated = await User.find({
+    const isValidated = await Admin.find({
         username,
         password
     })
