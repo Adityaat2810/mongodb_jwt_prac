@@ -4,7 +4,7 @@ const router = express.Router();
 const {Admin} =require('../db/index');
 const {Course} =require('../db/index');
 const jwt =require('jsonwebtoken'); 
-const JWT_SECRET = require('..');
+const { JWT_SECRET }= require('../config');
     
     
 router.post('/signup',async (req,res)=>{
